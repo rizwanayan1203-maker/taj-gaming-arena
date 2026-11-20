@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ GAMING ARENA</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090d18;color:white;font-family:Arial,sans-serif;padding-bottom:85px}
+header{padding:22px 18px;background:linear-gradient(135deg,#182b55,#101426)}
+.logo{font-size:25px;font-weight:900;color:#64eaff}
+.logo span{color:#ffba43}
+.sub{font-size:12px;color:#aab7d2;margin-top:6px}
+.wallet{background:#202b40;padding:13px;border-radius:13px;margin-top:18px;display:flex;justify-content:space-between;align-items:center}
+.wallet b{color:#69edba;font-size:19px}
+h2{font-size:19px;margin:23px 17px 13px}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 14px}
+.game{background:#171e30;border:1px solid #293752;border-radius:15px;padding:16px;text-align:center}
+.game .emoji{font-size:36px}
+.game h3{font-size:15px;margin:9px 0 5px}
+.game small{color:#9baac4}
+button{border:0;border-radius:9px;padding:11px 15px;background:#49dcb1;color:#07131a;font-weight:bold;cursor:pointer}
+.banner{margin:18px 14px;padding:20px;border-radius:17px;background:linear-gradient(120deg,#6438a8,#1c5f94)}
+.banner h2{margin:0 0 8px;font-size:21px}
+.banner p{font-size:13px;color:#e1eaff}
+.tournament{margin:12px 14px;background:#171e30;border:1px solid #293752;border-radius:15px;padding:15px}
+.trow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tournament h3{margin:0 0 8px;font-size:16px}
+.tag{font-size:11px;background:#253b45;color:#6df0c0;padding:6px 9px;border-radius:20px}
+.details{display:flex;justify-content:space-between;color:#aab7cc;font-size:12px;margin:15px 0}
+.join{width:100%}
+nav{position:fixed;bottom:0;left:0;right:0;background:#131a2b;border-top:1px solid #293752;display:flex;justify-content:space-around;padding:12px 3px}
+nav button{background:none;color:#b5c2d8;font-size:11px;padding:5px}
+nav button.active{color:#65eac3}
+.section{display:none}
+.section.active{display:block}
+#message{margin:12px 14px;color:#6df0c0;font-size:13px;text-align:center}
+.rank{display:flex;justify-content:space-between;padding:15px;background:#171e30;margin:9px 14px;border-radius:12px}
+.profile{margin:14px;padding:20px;background:#171e30;border-radius:15px;line-height:2}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">TAJ <span>GAMING</span> ARENA</div>
+<div class="sub">PLAY • COMPETE • WIN</div>
+<div class="wallet">
+<div>MY POINTS<br><b id="points">0 Points</b></div>
+<div>FREE TO PLAY 🎮</div>
+</div>
+</header>
+
+<div id="home" class="section active">
+<div class="banner">
+<h2>WELCOME GAMER! 🔥</h2>
+<p>Join tournaments, improve your skills and climb the leaderboard.</p>
+<button onclick="show('tournaments')">Explore Tournaments</button>
+</div>
+
+<h2>🎮 CHOOSE YOUR GAME</h2>
+<div class="games">
+<div class="game"><div class="emoji">🔫</div><h3>Free Fire</h3><small>Battle Tournament</small></div>
+<div class="game"><div class="emoji">🎯</div><h3>BGMI / PUBG</h3><small>Battle Tournament</small></div>
+<div class="game"><div class="emoji">🎲</div><h3>Ludo</h3><small>Board Challenge</small></div>
+<div class="game"><div class="emoji">🐍</div><h3>Snake</h3><small>High Score Challenge</small></div>
+<div class="game"><div class="emoji">🍉</div><h3>Fruit Cut</h3><small>Score Challenge</small></div>
+</div>
+<h2>🏆 UPCOMING TOURNAMENTS</h2>
+<div id="homeTournaments"></div>
+</div>
+
+<div id="tournaments" class="section">
+<h2>🏆 ALL TOURNAMENTS</h2>
+<div id="allTournaments"></div>
+</div>
+
+<div id="leaderboard" class="section">
+<h2>🥇 LEADERBOARD</h2>
+<div class="rank"><span>🥇 Pro Gamer</span><b>2500</b></div>
+<div class="rank"><span>🥈 King Player</span><b>2100</b></div>
+<div class="rank"><span>🥉 Shadow</span><b>1800</b></div>
+<div class="rank"><span>🎮 You</span><b id="myScore">0</b></div>
+<p style="color:#99a9c5;text-align:center;font-size:12px">Demo leaderboard – real scores will be added later.</p>
+</div>
+
+<div id="profile" class="section">
+<h2>👤 MY PROFILE</h2>
+<div class="profile">
+<h3>Gamer Profile</h3>
+Name: New Player<br>
+Account: Demo Account<br>
+Points: <b id="profilePoints">0</b><br>
+Status: Active<br>
+<button onclick="alert('Profile editing will be added later!')">Edit Profile</button>
+</div>
+</div>
+
+<div id="message"></div>
+
+<nav>
+<button class="active" onclick="show('home',this)">🏠<br>Home</button>
+<button onclick="show('tournaments',this)">🏆<br>Matches</button>
+<button onclick="show('leaderboard',this)">🥇<br>Ranks</button>
+<button onclick="show('profile',this)">👤<br>Profile</button>
+</nav>
+
+<script>
+const events=[
+{game:"Free Fire",emoji:"🔫",name:"Free Fire Solo Challenge",time:"6:00 PM",players:"12 / 50"},
+{game:"BGMI / PUBG",emoji:"🎯",name:"Battle Royale Challenge",time:"7:00 PM",players:"8 / 50"},
+{game:"Ludo",emoji:"🎲",name:"Ludo King Challenge",time:"8:00 PM",players:"4 / 20"},
+{game:"Snake",emoji:"🐍",name:"Snake High Score",time:"Anytime",players:"Open"},
+{game:"Fruit Cut",emoji:"🍉",name:"Fruit Cut Challenge",time:"Anytime",players:"Open"}
+];
+function card(e){
+return `<div class="tournament">
+<div class="trow"><h3>${e.emoji} ${e.name}</h3><span class="tag">FREE ENTRY</span></div>
+<div class="details"><span>🕒 ${e.time}</span><span>👥 ${e.players}</span></div>
+<button class="join" onclick="join('${e.game}')">JOIN TOURNAMENT</button>
+</div>`;
+}
+document.getElementById('homeTournaments').innerHTML=events.slice(0,3).map(card).join('');
+document.getElementById('allTournaments').innerHTML=events.map(card).join('');
+
+let points=0;
+function join(game){
+document.getElementById('message').innerText="✅ Demo: "+game+" tournament selected! Registration feature will be connected later.";
+}
+function show(id,btn){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+if(btn)btn.classList.add('active');
+document.getElementById('message').innerText="";
+}
+</script>
+</body>
+</html>
